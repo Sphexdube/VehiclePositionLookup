@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GeoCoordinatePortable;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using VehiclePositionLookup.Models;
 using VehiclePositionLookup.Utility;
@@ -17,6 +19,8 @@ namespace VehiclePositionLookup
 
             List<VehiclePosition> vehiclePositions = DataFileParser.ReadDataFile();
 
+            var listOfFilterdVehiclePositions = GetListOfFilterdCoordinates(vehiclePositions, coords);
+
             stopwatch.Stop();
 
             long elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
@@ -25,7 +29,7 @@ namespace VehiclePositionLookup
 
             Parallel.ForEach(coords, coord =>
             {
-                vehiclePositionList.Add(GetNearest(vehiclePositions, coord.Latitude, coord.Longitude));
+                vehiclePositionList.Add(GetNearest(listOfFilterdVehiclePositions, coord.Latitude, coord.Longitude));
             });
 
             stopwatch.Stop();
@@ -36,12 +40,39 @@ namespace VehiclePositionLookup
             Console.WriteLine();
         }
 
+        private static List<VehiclePosition> GetListOfFilterdCoordinates(List<VehiclePosition> vehiclePositions, Coordinate[] coords)
+        {
+            Coordinate minCoordinate, maxCoordinate;
+
+            GetMinMaxCoordinates(coords, out minCoordinate, out maxCoordinate);
+
+            return (from p in vehiclePositions
+                    where (p.Latitude >= minCoordinate.Latitude && p.Latitude <= maxCoordinate.Latitude) &&
+                           (p.Longitude >= minCoordinate.Longitude && p.Longitude <= maxCoordinate.Longitude)
+                    select p).ToList();
+        }
+
+        private static void GetMinMaxCoordinates(Coordinate[] coords, out Coordinate minCoordinate, out Coordinate maxCoordinate)
+        {
+            minCoordinate = new Coordinate()
+            {
+                Latitude = coords.Min(p => p.Latitude),
+                Longitude = coords.Min(p => p.Longitude)
+            };
+            maxCoordinate = new Coordinate()
+            {
+                Latitude = coords.Max(p => p.Latitude),
+                Longitude = coords.Max(p => p.Longitude)
+            };
+        }
+
         internal static VehiclePosition GetNearest(List<VehiclePosition> vehiclePositions, float latitude, float longitude)
         {
             double nearestDistance = 0;
             VehiclePosition nearest = null;
 
-            Parallel.ForEach(vehiclePositions, vehiclePosition => 
+
+            Parallel.ForEach(vehiclePositions, vehiclePosition =>
             {
                 double num = UtilityMethods.DistanceBetween(latitude, longitude, vehiclePosition.Latitude, vehiclePosition.Longitude);
                 if (num < nearestDistance)
