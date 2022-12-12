@@ -1,0 +1,11 @@
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\bin\Debug\netcoreapp2.1\VehiclePositionLookup.deps.json
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\bin\Debug\netcoreapp2.1\VehiclePositionLookup.runtimeconfig.json
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\bin\Debug\netcoreapp2.1\VehiclePositionLookup.runtimeconfig.dev.json
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\bin\Debug\netcoreapp2.1\VehiclePositionLookup.dll
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\bin\Debug\netcoreapp2.1\VehiclePositionLookup.pdb
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.csprojAssemblyReference.cache
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.csproj.CoreCompileInputs.cache
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.AssemblyInfoInputs.cache
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.AssemblyInfo.cs
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.dll
+C:\Users\Siphesihle\source\repos\VehiclePositionLookup\VehiclePositionLookup\obj\Debug\netcoreapp2.1\VehiclePositionLookup.pdb
