@@ -37,7 +37,23 @@ namespace VehiclePositionLookup
             Console.WriteLine($"Data file read execution time : {(object)elapsedMilliseconds} ms");
             Console.WriteLine($"Closest position calculation execution time : {(object)stopwatch.ElapsedMilliseconds} ms");
             Console.WriteLine($"Total execution time : {(object)(elapsedMilliseconds + stopwatch.ElapsedMilliseconds)} ms");
+
+            if (vehiclePositionList.Count > 0)
+            {
+                DisplayVehiclePositions(vehiclePositionList);
+            }
+            
             Console.WriteLine();
+        }
+
+        private static void DisplayVehiclePositions(List<VehiclePosition> vehiclePositionList)
+        {
+            Console.WriteLine($"The nearest vehicle position of the 10 coordinates provided: \n");
+
+            foreach (var vehicle in vehiclePositionList)
+            {
+                Console.WriteLine($"ID: {vehicle.ID} Registration: {vehicle.Registration} Latitude: {vehicle.Latitude} Longitude: {vehicle.Longitude} RecordedTimeUTC: { vehicle.RecordedTimeUTC}");
+            }
         }
 
         private static List<VehiclePosition> GetListOfFilterdCoordinates(List<VehiclePosition> vehiclePositions, Coordinate[] coords)
@@ -68,9 +84,8 @@ namespace VehiclePositionLookup
 
         internal static VehiclePosition GetNearest(List<VehiclePosition> vehiclePositions, float latitude, float longitude)
         {
-            double nearestDistance = 0;
+            double nearestDistance = double.MaxValue;
             VehiclePosition nearest = null;
-
 
             Parallel.ForEach(vehiclePositions, vehiclePosition =>
             {
